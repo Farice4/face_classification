@@ -1,13 +1,13 @@
-FROM debian:latest
+FROM tensorflow/tensorflow:1.3.0
 
-RUN apt-get -y update && apt-get install -y git python3-pip python3-dev python3-tk vim procps curl
+RUN apt-get -y update && apt-get install -y git python3-pip python3-dev python3-tk vim procps curl wget 
 
 #Face classificarion dependencies & web application
-RUN pip3 install numpy scipy scikit-learn pillow tensorflow pandas h5py opencv-python==3.2.0.8 keras statistics pyyaml pyparsing cycler matplotlib Flask
+RUN pip3 install scipy==0.19.1 keras==2.0.5 tensorflow==1.3.0 pandas==0.19.1 numpy==1.12.1 h5py==2.7.0 statistics opencv-python==3.2.0.8 Flask==0.12.2 matplotlib==2.0.2 Pillow==4.2.1
 
-ADD . /ekholabs/face-classifier
+ADD ../face_classification /root/
 
-WORKDIR ekholabs/face-classifier
+WORKDIR /root/face_classification
 
 ENV PYTHONPATH=$PYTHONPATH:src
 ENV FACE_CLASSIFIER_PORT=8084
