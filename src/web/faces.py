@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return redirect("https://ekholabs.ai", code=302)
 
-@app.route('/classifyImage', methods=['POST'])
+@app.route('/model_app/face_classification/detect', methods=['POST'])
 def upload():
     try:
         image = request.files['image'].read()
