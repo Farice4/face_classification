@@ -15,7 +15,7 @@ from utils.inference import load_detection_model
 from utils.inference import load_image
 from utils.preprocessor import preprocess_input
 
-def process_image(image):
+def process_image(image, filename):
 
     try:
         # parameters for loading data and images
@@ -91,4 +91,4 @@ def process_image(image):
     if not os.path.exists(dirname):
         os.mkdir(dirname)
 
-    cv2.imwrite(os.path.join(dirname, 'predicted_image.png'), bgr_image)
+    cv2.imwrite(os.path.join(dirname, filename), bgr_image)
