@@ -41,4 +41,4 @@ def not_found(error):
 
 if __name__ == '__main__':
     app.config['model_path'] = sys.argv[1]
-    app.run(debug=True, host='0.0.0.0', port=8084)
+    app.run(debug=True, host='0.0.0.0', port=80)
