@@ -52,8 +52,9 @@ for dataset_name in datasets:
     early_stop = EarlyStopping('val_loss', patience=patience)
     reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1,
                                   patience=int(patience/4), verbose=1)
-    trained_models_path = base_path + dataset_name + '_mini_XCEPTION'
-    model_names = trained_models_path + '.{epoch:02d}-{val_acc:.2f}.hdf5'
+    # trained_models_path = base_path + dataset_name + '_mini_XCEPTION'
+    # model_names = trained_models_path + '.{epoch:02d}-{val_acc:.2f}.hdf5'
+    model_names = base_path + 'fer2013_mini_XCEPTION.102-0.66.hdf5'
     model_checkpoint = ModelCheckpoint(model_names, 'val_loss', verbose=1,
                                                     save_best_only=True)
     callbacks = [model_checkpoint, csv_logger, early_stop, reduce_lr]

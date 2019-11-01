@@ -21,12 +21,15 @@ do_random_crop = False
 patience = 100
 num_classes = 2
 dataset_name = 'imdb'
-input_shape = (64, 64, 1)
+# train model use rgb 3 channel
+input_shape = (64, 64, 3)
+grayscale = False
 if input_shape[2] == 1:
     grayscale = True
 images_path = '../datasets/imdb_crop/'
 log_file_path = '../trained_models/gender_models/gender_training.log'
-trained_models_path = '../trained_models/gender_models/gender_mini_XCEPTION'
+# trained_models_path = '../trained_models/gender_models/gender_mini_XCEPTION'
+trained_models_path = '../trained_models/gender_models/'
 
 # data loader
 data_loader = DataManager(dataset_name)
@@ -54,7 +57,7 @@ early_stop = EarlyStopping('val_loss', patience=patience)
 reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1,
                               patience=int(patience/2), verbose=1)
 csv_logger = CSVLogger(log_file_path, append=False)
-model_names = trained_models_path + '.{epoch:02d}-{val_acc:.2f}.hdf5'
+model_names = trained_models_path + 'simple_CNN.81-0.96.hdf5'
 model_checkpoint = ModelCheckpoint(model_names,
                                    'val_loss',
                                    verbose=1,
