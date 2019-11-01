@@ -56,10 +56,9 @@ reduce_lr = ReduceLROnPlateau('val_loss', factor=0.1,
 csv_logger = CSVLogger(log_file_path, append=False)
 model_names = trained_models_path + '.{epoch:02d}-{val_acc:.2f}.hdf5'
 model_checkpoint = ModelCheckpoint(model_names,
-                                   monitor='val_loss',
+                                   'val_loss',
                                    verbose=1,
-                                   save_best_only=True,
-                                   save_weights_only=False)
+                                   save_best_only=True)
 callbacks = [model_checkpoint, csv_logger, early_stop, reduce_lr]
 
 # training model
