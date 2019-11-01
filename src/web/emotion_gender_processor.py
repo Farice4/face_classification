@@ -15,13 +15,14 @@ from utils.inference import load_detection_model
 from utils.inference import load_image
 from utils.preprocessor import preprocess_input
 
-def process_image(image, filename):
+
+def process_image(image, filename, model_path):
 
     try:
         # parameters for loading data and images
         detection_model_path = './trained_models/detection_models/haarcascade_frontalface_default.xml'
-        emotion_model_path = './trained_models/emotion_models/fer2013_mini_XCEPTION.102-0.66.hdf5'
-        gender_model_path = './trained_models/gender_models/simple_CNN.81-0.96.hdf5'
+        emotion_model_path = model_path + '/emotion_models/fer2013_mini_XCEPTION.102-0.66.hdf5'
+        gender_model_path = model_path + '/gender_models/simple_CNN.81-0.96.hdf5'
         emotion_labels = get_labels('fer2013')
         gender_labels = get_labels('imdb')
         font = cv2.FONT_HERSHEY_SIMPLEX

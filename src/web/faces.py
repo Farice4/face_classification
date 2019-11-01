@@ -3,6 +3,7 @@ import logging
 import base64
 import uuid
 import os
+import sys
 
 import emotion_gender_processor as eg_processor
 
@@ -15,7 +16,7 @@ def upload():
         image = request.files['image']
         fn = (image.filename).split('.')
         filename = str(uuid.uuid4()) + fn[0] + '.' + fn[1]
-        eg_processor.process_image(image.read(), filename)
+        eg_processor.process_image(image.read(), filename, app.config.get('model_path'))
         return make_response(jsonify(convert_data(filename)), 200)
     except Exception as err:
         logging.error('An error has occurred whilst processing the file: "{0}"'.format(err))
@@ -39,4 +40,5 @@ def not_found(error):
     return make_response(jsonify({'error': 'Resource no found.'}), 404)
 
 if __name__ == '__main__':
+    app.config['model_path'] = sys.argv[1]
     app.run(debug=True, host='0.0.0.0', port=8084)
