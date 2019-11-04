@@ -13,7 +13,9 @@ app = Flask(__name__)
 @app.route('/model_app/face_classification/detect', methods=['POST'])
 def upload():
     try:
-        image = request.files['image']
+        image = request.files.get('image')
+        if not image:
+            return make_response('Please provide \'image\' for detect.\n', 400)
         fn = (image.filename).split('.')
         filename = str(uuid.uuid4()) + fn[0] + '.' + fn[1]
         eg_processor.process_image(image.read(), filename, app.config.get('model_path'))
