@@ -16,8 +16,7 @@ def upload():
         image = request.files.get('image')
         if not image:
             return make_response('Please provide \'image\' for detect.\n', 400)
-        fn = (image.filename).split('.')
-        filename = str(uuid.uuid4()) + fn[0] + '.' + fn[1]
+        filename = str(uuid.uuid4()) + '-' + image.filename
         eg_processor.process_image(image.read(), filename, app.config.get('model_path'))
         return make_response(jsonify(convert_data(filename)), 200)
     except Exception as err:
